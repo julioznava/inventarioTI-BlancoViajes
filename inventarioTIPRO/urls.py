@@ -1,0 +1,32 @@
+from django.urls import path
+from .views import *
+
+urlpatterns = [
+    path('',home, name="home"),
+    path('login/',login, name="login"),
+    path('panel/',panel, name="panel"),
+    path('equipos/', equipos, name="equipos"),
+    path('monitores/', monitores, name="monitores"),
+    path('perifericos/', perifericos, name="perifericos"),
+    path('impresoras/', impresoras, name="impresoras"),
+    path('telefonia/', telefonia, name="telefonia"),
+    path('listarequipos/', listarequipos, name="listarequipos"),
+    path('listarmonitores/', listarmonitores, name="listarmonitores"),
+    path('listarperifericos/', listarperifericos, name="listarperifericos"),
+    path('listarimpresoras/', listarimpresoras, name="listarimpresoras"),
+    path('listartelefonia/', listartelefonia, name="listartelefonia"),
+    path('eliminarequipos/<id>/', eliminarequipos, name='eliminarequipos'),
+    path('modificarmonitores/<id>/', modificarmonitores, name='modificarmonitores'),
+    path('eliminarmonitores/<id>/', eliminarmonitores, name='eliminarmonitores'),
+    path('modificarequipos/<id>/', modificarequipos, name='modificarequipos'),
+    path('modificarperisferico/<id>/', modificarperisferico, name='modificarperisferico'),
+    path('eliminarperisfericos/<id>/', eliminarperisfericos, name='eliminarperisfericos'),
+    path('modificarimpresoras/<id>/', modificarimpresoras, name='modificarimpresoras'),
+    path('eliminarimpresoras/<id>/', eliminarimpresoras, name='eliminarimpresoras'),
+    path('modificartelefonia/<id>/', modificartelefonia, name='modificartelefonia'),
+    path('eliminartelefonia/<id>/', eliminartelefonia, name='eliminartelefonia'),
+    path('registro/', registro, name='registro'),
+    path('personas/', personas, name='personas'),
+    path('listarpersonas/', listarpersonas, name='listarpersonas'),
+    path('detalle/', detalle, name='detalle'),
+]
