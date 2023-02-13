@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Persona, Equipos, Monitores, Perifericos, Impresoras, Telefonia
-from .forms import EquiposForm, MonitoresForm, PerifericosForm, ImpresorasForm, TelefoniaForm, CustomUserCreationForm, PersonasForm
+from .models import Equipos, Monitores, Perifericos
+from .forms import EquiposForm, MonitoresForm, PerifericosForm, CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
@@ -38,7 +38,7 @@ def equipos(request):
         else:
             data['form'] = formulario
 
-    return render(request, 'equipos.html', data)
+    return render(request, 'Equipos/equipos.html', data)
 
 
 def listarequipos(request):
@@ -48,7 +48,7 @@ def listarequipos(request):
     data = {
         'listar': listar,
     }
-    return render(request, 'listarequipos.html', data)
+    return render(request, 'Equipos/listarequipos.html', data)
 
 
 def modificarequipos(request, id):
@@ -64,7 +64,7 @@ def modificarequipos(request, id):
             return redirect(to="listarequipos")
         data["form"] = formulario
 
-    return render(request, 'modificarequipos.html', data)
+    return render(request, 'Equipos/modificarequipos.html', data)
 
 
 def eliminarequipos(request, id):
@@ -87,7 +87,7 @@ def monitores(request):
         else:
             data["form"] = formulario
 
-    return render(request, 'monitores.html', data)
+    return render(request, 'Monitores/monitores.html', data)
 
 
 def listarmonitores(request):
@@ -96,7 +96,7 @@ def listarmonitores(request):
     data = {
         'listar': listar
     }
-    return render(request, 'listarmonitores.html', data)
+    return render(request, 'Monitores/listarmonitores.html', data)
 
 
 def modificarmonitores(request, id):
@@ -112,16 +112,13 @@ def modificarmonitores(request, id):
             return redirect(to="listarmonitores")
         data["form"] = formulario
 
-    return render(request, 'modificarmonitores.html', data)
+    return render(request, 'Monitores/modificarmonitores.html', data)
 
 
 def eliminarmonitores(request, id):
     eliminarmonitor = get_object_or_404(Monitores, id=id)
     eliminarmonitor.delete()
     return redirect(to="listarmonitores")
-
-
-
 
 def perifericos(request):
     data = {
@@ -135,7 +132,7 @@ def perifericos(request):
         else:
             data["form"] = formulario
 
-    return render(request, 'perifericos.html', data)
+    return render(request, 'Perifericos/perifericos.html', data)
 
 
 def listarperifericos(request):
@@ -144,7 +141,7 @@ def listarperifericos(request):
     data = {
         'listar': listar
     }
-    return render(request, 'listarperifericos.html', data)
+    return render(request, 'Perifericos/listarperifericos.html', data)
 
 def modificarperisferico(request, id):
     perisfericos = get_object_or_404(Perifericos, id=id)
@@ -159,107 +156,12 @@ def modificarperisferico(request, id):
             return redirect(to="listarperifericos")
         data["form"] = formulario
 
-    return render(request, 'modificarperisfericos.html', data)
+    return render(request, 'Perifericos/modificarperisfericos.html', data)
 
 def eliminarperisfericos(request, id):
     eliminarperisferico = get_object_or_404(Perifericos, id=id)
     eliminarperisferico.delete()
     return redirect(to="listarperifericos")
-
-
-
-def impresoras(request):
-    data = {
-        'form': ImpresorasForm()
-    }
-    if request.method == 'POST':
-        formulario = ImpresorasForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "Se han ingresado los datos correctamente."
-        else:
-            data["form"] = formulario
-
-    return render(request, 'impresoras.html', data)
-
-
-def listarimpresoras(request):
-    listar = Impresoras.objects.all()
-
-    data = {
-        'listar': listar
-    }
-    return render(request, 'listarimpresoras.html', data)
-
-
-def modificarimpresoras(request, id):
-    impresoras = get_object_or_404(Impresoras, id=id)
-
-    data = {
-        'form':PerifericosForm(instance=impresoras)
-    }
-    if request.method == 'POST':
-        formulario = ImpresorasForm(data=request.POST, instance=impresoras)
-        if formulario.is_valid():
-            formulario.save()
-            return redirect(to="listarimpresoras")
-        data["form"] = formulario
-
-    return render(request, 'modificarimpresoras.html', data)
-
-def eliminarimpresoras(request, id):
-    eliminarimpresora = get_object_or_404(Impresoras, id=id)
-    eliminarimpresora.delete()
-    return redirect(to="listarimpresoras")
-
-
-
-
-
-def telefonia(request):
-    data = {
-        'form': TelefoniaForm()
-    }
-    if request.method == 'POST':
-        formulario = TelefoniaForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "Se han ingresado los datos correctamente."
-        else:
-            data["form"] = formulario
-
-    return render(request, 'telefonia.html', data)
-
-
-def listartelefonia(request):
-    listar = Telefonia.objects.all()
-
-    data = {
-        'listar': listar
-    }
-    return render(request, 'listartelefonia.html', data)
-
-
-def modificartelefonia(request, id):
-    telefonia = get_object_or_404(Telefonia, id=id)
-
-    data = {
-        'form':PerifericosForm(instance=telefonia)
-    }
-    if request.method == 'POST':
-        formulario = TelefoniaForm(data=request.POST, instance=telefonia)
-        if formulario.is_valid():
-            formulario.save()
-            return redirect(to="listartelefonia")
-        data["form"] = formulario
-
-    return render(request, 'modificartelefonia.html', data)
-
-
-def eliminartelefonia(request, id):
-    eliminartelefonia = get_object_or_404(Telefonia, id=id)
-    eliminartelefonia.delete()
-    return redirect(to="listartelefonia")
 
 
 
@@ -277,38 +179,6 @@ def registro(request):
             return redirect(to="login")
         data["form"] = formulario
     return render(request, './registration/registro.html', data)
-
-
-def personas(request):
-    data = {
-        'form': PersonasForm()
-    }
-    if request.method == 'POST':
-        formulario = PersonasForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "Se han ingresado los datos correctamente."
-        else:
-            data["form"] = formulario
-
-    return render(request, 'personas.html', data)
-
-def listarpersonas(request):
-    if 'q' in request.GET:
-        q = request.GET['q']
-        data = Equipos.objects.filter(persona__icontains=q)
-    else:
-        data = Equipos.objects.all()
-    context = {
-        'data': data
-    }
-
-    listar = Persona.objects.all()
-
-    data = {
-        'listar': listar
-    }
-    return render(request, 'buscarpersona.html', context)
 
 
 def detalle(request):
