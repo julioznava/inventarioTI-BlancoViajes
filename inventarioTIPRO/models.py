@@ -125,6 +125,7 @@ opcion_USUARIOS = [
     ["Zamora, Francisco Javier", "Zamora, Francisco Javier"],
 ]
 
+
 class Equipos(models.Model):
     codigo = models.CharField(max_length=100)
     serieproducto = models.CharField(max_length=100)
@@ -167,35 +168,19 @@ class Perifericos(models.Model):
     def __str__(self):
         return self.tipo_periferico
 
-
-# class Telefonia(models.Model):
-#     tipo_telefonia = models.CharField(max_length= 50, choices=opcion_TELEFONIA)
-#     codigo = models.CharField(max_length=100)
-#     marca = models.CharField(max_length=100)
-#     modelo = models.CharField(max_length=100)
-#     sistema_operativo = models.CharField(max_length=100, choices=opcion_so)
-#     estado = models.CharField(max_length=100, choices=opcion_ESTADO)
-#     observaciones = models.CharField(max_length=150, blank=True)
-#
-#     def __str__(self):
-#         return self.marca
-
-
-
-
-
-
 class Departamento(models.Model):
     departamento = models.CharField(max_length=50, choices=opcion_DEPARTAMENTOS)
 
     def __str__(self):
         return self.departamento
 
-
-
-
 class Asignacion(models.Model):
     usuarios = models.CharField(max_length=100, choices=opcion_USUARIOS, verbose_name='Asignado')
     departamentos = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+    equipo = models.ForeignKey(Equipos, on_delete=models.CASCADE)
     def __str__(self):
         return (self.usuarios, self.departamentos)
+
+
+
+

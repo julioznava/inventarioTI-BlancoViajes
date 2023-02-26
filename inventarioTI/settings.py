@@ -89,14 +89,16 @@ WSGI_APPLICATION = 'inventarioTI.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bdinventario',
+        'USER': 'julioznava',
+        'PASSWORD': 'SdKs136.',
+        'HOST': 'database-inventario.cup6rkc5tisz.sa-east-1.rds.amazonaws.com',
+        'PORT': 3306
     }
 }
 
-
-# Password validation
+    # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
